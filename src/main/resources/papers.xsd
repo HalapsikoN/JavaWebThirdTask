@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="papers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="paper"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="paper" type="PaperType" abstract="true"/>
+    <xs:element name="magazine" type="Magazine" substitutionGroup="paper"/>
+    <xs:element name="newspaper" type="Newspaper" substitutionGroup="paper"/>
+    <xs:element name="booklet" type="Booklet" substitutionGroup="paper"/>
+
+    <xs:complexType name="PaperType">
+        <xs:all>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="monthly" type="xs:boolean"/>
+            <xs:element name="color" type="xs:boolean"/>
+            <xs:element name="volume" type="xs:integer"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="Magazine">
+        <xs:complexContent>
+            <xs:extension base="PaperType">
+                <xs:all>
+                    <xs:element name="type" type="xs:string" fixed="magazine"/>
+                    <xs:element name="glossy" type="xs:boolean" fixed="true"/>
+                    <xs:element name="index" type="xs:integer"/>
+                </xs:all>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Newspaper">
+        <xs:complexContent>
+            <xs:extension base="PaperType">
+                <xs:all>
+                    <xs:element name="type" type="xs:string" fixed="newspaper"/>
+                    <xs:element name="glossy" type="xs:boolean" fixed="false"/>
+                    <xs:element name="index" type="xs:integer"/>
+                </xs:all>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Booklet">
+        <xs:complexContent>
+            <xs:extension base="PaperType">
+                <xs:all>
+                    <xs:element name="type" type="xs:string" fixed="booklet"/>
+                    <xs:element name="glossy" type="xs:boolean" fixed="true"/>
+                </xs:all>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

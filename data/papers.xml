@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<papers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../src/main/resources/papers.xsd">
+    <newspaper>
+        <title>FOX</title>
+        <monthly>true</monthly>
+        <color>true</color>
+        <volume>56</volume>
+        <index>15</index>
+    </newspaper>
+
+
+
+</papers>
