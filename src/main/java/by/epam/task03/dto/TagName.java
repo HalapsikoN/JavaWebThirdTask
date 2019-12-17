@@ -13,42 +13,42 @@ public enum TagName {
     BOOKLET,
     PAPERS;
 
-    public static TagName getElemntTagName(String element){
-        switch (element){
-            case "title":{
+    public static TagName getElementTagName(String element) {
+        switch (element) {
+            case "title": {
                 return TITLE;
             }
-            case "monthly":{
+            case "monthly": {
                 return MONTHLY;
             }
-            case "color":{
+            case "color": {
                 return COLOR;
             }
-            case "volume":{
+            case "volume": {
                 return VOLUME;
             }
-            case "type":{
+            case "type": {
                 return TYPE;
             }
-            case "glossy":{
+            case "glossy": {
                 return GLOSSY;
             }
-            case "index":{
+            case "index": {
                 return INDEX;
             }
-            case "magazine":{
+            case "magazine": {
                 return MAGAZINE;
             }
-            case "newspaper":{
+            case "newspaper": {
                 return NEWSPAPER;
             }
-            case "booklet":{
+            case "booklet": {
                 return BOOKLET;
             }
-            case "papers":{
+            case "papers": {
                 return PAPERS;
             }
-            default:{
+            default: {
                 throw new EnumConstantNotPresentException(TagName.class, element);
             }
         }

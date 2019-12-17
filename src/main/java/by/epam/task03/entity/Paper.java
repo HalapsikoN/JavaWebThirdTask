@@ -1,5 +1,7 @@
 package by.epam.task03.entity;
 
+import java.util.Objects;
+
 public abstract class Paper {
     private String id;
     private String publicationDate;
@@ -99,11 +101,11 @@ public abstract class Paper {
         if (color != paper.color) return false;
         if (glossy != paper.glossy) return false;
         if (volume != paper.volume) return false;
-        if (id != null ? !id.equals(paper.id) : paper.id != null) return false;
-        if (publicationDate != null ? !publicationDate.equals(paper.publicationDate) : paper.publicationDate != null)
+        if (!Objects.equals(id, paper.id)) return false;
+        if (!Objects.equals(publicationDate, paper.publicationDate))
             return false;
-        if (title != null ? !title.equals(paper.title) : paper.title != null) return false;
-        return type != null ? type.equals(paper.type) : paper.type == null;
+        if (!Objects.equals(title, paper.title)) return false;
+        return Objects.equals(type, paper.type);
 
     }
 

@@ -1,6 +1,6 @@
 package by.epam.task03.entity;
 
-public class Magazine extends Paper{
+public class Magazine extends Paper {
     private int index;
 
     public Magazine(String id, String publicationDate, String title, String type, boolean monthly, boolean color, boolean glossy, int volume, int index) {

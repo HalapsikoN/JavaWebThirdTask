@@ -1,4 +1,4 @@
-package by.epam.task03.sax;
+package by.epam.task03.parserXMLHandler;
 
 import by.epam.task03.dto.AttributesName;
 import by.epam.task03.dto.PaperType;
@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SAXHandler extends DefaultHandler {
-    private static final Logger logger= LogManager.getLogger(SAXHandler.class);
+    private static final Logger logger = LogManager.getLogger(SAXHandler.class);
 
-    private List<Paper> paperList=new ArrayList<>();
+    private List<Paper> paperList = new ArrayList<>();
     private Paper current;
     private StringBuilder text;
 
@@ -35,18 +35,18 @@ public class SAXHandler extends DefaultHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        text=new StringBuilder();
-        if(localName.equals(PaperType.MAGAZINE.name().toLowerCase())){
+        text = new StringBuilder();
+        if (localName.equals(PaperType.MAGAZINE.name().toLowerCase())) {
             logger.info("<-----magazine element start----->");
             current = new Magazine();
             setIdAndDateAttributes(attributes);
         }
-        if(localName.equals(PaperType.NEWSPAPER.name().toLowerCase())){
+        if (localName.equals(PaperType.NEWSPAPER.name().toLowerCase())) {
             logger.info("<-----newspaper element----->");
             current = new Newspaper();
             setIdAndDateAttributes(attributes);
         }
-        if(localName.equals(PaperType.BOOKLET.name().toLowerCase())){
+        if (localName.equals(PaperType.BOOKLET.name().toLowerCase())) {
             logger.info("<-----booklet element----->");
             current = new Booklet();
             setIdAndDateAttributes(attributes);
@@ -55,52 +55,52 @@ public class SAXHandler extends DefaultHandler {
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
-        text.append(ch,start,length);
+        text.append(ch, start, length);
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        TagName tagName=TagName.valueOf(localName.toUpperCase());
+        TagName tagName = TagName.valueOf(localName.toUpperCase());
         switch (tagName) {
             case TITLE: {
-                logger.info("title -> "+ text.toString());
+                logger.info("title -> " + text.toString());
                 current.setTitle(text.toString());
                 break;
             }
             case MONTHLY: {
-                logger.info("monthly -> "+ text.toString());
+                logger.info("monthly -> " + text.toString());
                 current.setMonthly(Boolean.valueOf(text.toString()));
                 break;
             }
             case COLOR: {
-                logger.info("color -> "+ text.toString());
+                logger.info("color -> " + text.toString());
                 current.setColor(Boolean.valueOf(text.toString()));
                 break;
             }
-            case VOLUME:{
-                logger.info("volume -> "+ text.toString());
+            case VOLUME: {
+                logger.info("volume -> " + text.toString());
                 current.setVolume(Integer.valueOf(text.toString()));
                 break;
             }
-            case TYPE:{
-                logger.info("type -> "+ text.toString());
+            case TYPE: {
+                logger.info("type -> " + text.toString());
                 current.setType(text.toString());
                 break;
             }
-            case GLOSSY:{
-                logger.info("glossy -> "+ text.toString());
+            case GLOSSY: {
+                logger.info("glossy -> " + text.toString());
                 current.setGlossy(Boolean.valueOf(text.toString()));
                 break;
             }
-            case INDEX:{
-                if(current.getClass().equals(Magazine.class)){
-                    logger.info("index -> "+ text.toString());
-                    Magazine magazine=(Magazine) current;
+            case INDEX: {
+                if (current.getClass().equals(Magazine.class)) {
+                    logger.info("index -> " + text.toString());
+                    Magazine magazine = (Magazine) current;
                     magazine.setIndex(Integer.valueOf(text.toString()));
                 }
-                if(current.getClass().equals(Newspaper.class)){
-                    logger.info("index -> "+ text.toString());
-                    Newspaper magazine=(Newspaper) current;
+                if (current.getClass().equals(Newspaper.class)) {
+                    logger.info("index -> " + text.toString());
+                    Newspaper magazine = (Newspaper) current;
                     magazine.setIndex(Integer.valueOf(text.toString()));
                 }
                 break;
@@ -110,7 +110,7 @@ public class SAXHandler extends DefaultHandler {
             case BOOKLET: {
                 logger.info("<-----element end----->");
                 paperList.add(current);
-                current=null;
+                current = null;
                 break;
             }
         }
@@ -122,10 +122,10 @@ public class SAXHandler extends DefaultHandler {
         super.endDocument();
     }
 
-    private void setIdAndDateAttributes(Attributes attributes){
+    private void setIdAndDateAttributes(Attributes attributes) {
         String id = attributes.getValue(AttributesName.ID.name().toLowerCase());
         current.setId(id);
-        if(attributes.getLength()>1) {
+        if (attributes.getLength() > 1) {
             String publicationDate = attributes.getValue(AttributesName.PUBLICATION_DATE.name().toLowerCase());
             current.setPublicationDate(publicationDate);
         }

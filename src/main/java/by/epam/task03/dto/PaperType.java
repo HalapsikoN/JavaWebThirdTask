@@ -5,18 +5,18 @@ public enum PaperType {
     NEWSPAPER,
     BOOKLET;
 
-    public static PaperType getElemntTagName(String element){
-        switch (element){
-            case "magazine":{
+    public static PaperType getElemntTagName(String element) {
+        switch (element) {
+            case "magazine": {
                 return MAGAZINE;
             }
-            case "newspaper":{
+            case "newspaper": {
                 return NEWSPAPER;
             }
-            case "booklet":{
+            case "booklet": {
                 return BOOKLET;
             }
-            default:{
+            default: {
                 throw new EnumConstantNotPresentException(TagName.class, element);
             }
         }

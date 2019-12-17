@@ -42,7 +42,7 @@ public class Newspaper extends Paper {
     @Override
     public String toString() {
         return "Newspaper{" +
-                super.toString()+
+                super.toString() +
                 " index=" + index +
                 '}';
     }

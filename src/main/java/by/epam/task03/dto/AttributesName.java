@@ -4,15 +4,15 @@ public enum AttributesName {
     ID,
     PUBLICATION_DATE;
 
-    public static AttributesName getElemntTagName(String element){
-        switch (element){
-            case "id":{
+    public static AttributesName getElemntTagName(String element) {
+        switch (element) {
+            case "id": {
                 return ID;
             }
-            case "publication_date":{
+            case "publication_date": {
                 return PUBLICATION_DATE;
             }
-            default:{
+            default: {
                 throw new EnumConstantNotPresentException(TagName.class, element);
             }
         }

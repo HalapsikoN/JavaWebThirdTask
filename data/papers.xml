@@ -33,5 +33,14 @@
         <index>469854</index>
     </magazine>
 
+    <booklet id="ID-4">
+        <title>Test booklet2</title>
+        <monthly>false</monthly>
+        <color>true</color>
+        <volume>56</volume>
+        <type>booklet</type>
+        <glossy>true</glossy>
+    </booklet>
+
 
 </papers>
