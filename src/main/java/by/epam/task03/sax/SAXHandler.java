@@ -1,4 +1,4 @@
-package by.epam.task03.sax.saxHendlers;
+package by.epam.task03.sax;
 
 import by.epam.task03.dto.AttributesName;
 import by.epam.task03.dto.PaperType;
@@ -60,7 +60,7 @@ public class SAXHandler extends DefaultHandler {
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        TagName tagName=TagName.valueOf(localName.toUpperCase().replace("-","_"));
+        TagName tagName=TagName.valueOf(localName.toUpperCase());
         switch (tagName) {
             case TITLE: {
                 logger.info("title -> "+ text.toString());
@@ -123,9 +123,11 @@ public class SAXHandler extends DefaultHandler {
     }
 
     private void setIdAndDateAttributes(Attributes attributes){
-        current.setId(attributes.getValue(AttributesName.ID.name().toLowerCase()));
+        String id = attributes.getValue(AttributesName.ID.name().toLowerCase());
+        current.setId(id);
         if(attributes.getLength()>1) {
-            current.setPublicationDate(attributes.getValue(AttributesName.PUBLICATION_DATE.name().toLowerCase().replace("_", "-")));
+            String publicationDate = attributes.getValue(AttributesName.PUBLICATION_DATE.name().toLowerCase());
+            current.setPublicationDate(publicationDate);
         }
     }
 }
