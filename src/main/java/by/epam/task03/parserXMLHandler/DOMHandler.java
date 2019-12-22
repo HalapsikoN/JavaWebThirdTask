@@ -57,53 +57,53 @@ public class DOMHandler {
     }
 
     private Magazine buildMagazine(Element element) {
-        Magazine magazine = new Magazine();
+        Magazine.Builder magazine = new Magazine.Builder();
         buildPaper(element, magazine);
         int index = Integer.parseInt(getElementTextContext(element, TagName.INDEX.name().toLowerCase()));
-        magazine.setIndex(index);
+        magazine.withIndex(index);
         logger.info("index -> " + index);
-        return magazine;
+        return magazine.build();
     }
 
     private Newspaper buildNewspaper(Element element) {
-        Newspaper newspaper = new Newspaper();
+        Newspaper.Builder newspaper = new Newspaper.Builder();
         buildPaper(element, newspaper);
         int index = Integer.parseInt(getElementTextContext(element, TagName.INDEX.name().toLowerCase()));
-        newspaper.setIndex(index);
+        newspaper.withIndex(index);
         logger.info("index -> " + index);
-        return newspaper;
+        return newspaper.build();
     }
 
     private Booklet buildBooklet(Element element) {
-        Booklet booklet = new Booklet();
+        Booklet.Builder booklet = new Booklet.Builder();
         buildPaper(element, booklet);
-        return booklet;
+        return booklet.build();
     }
 
-    private void buildPaper(Element element, Paper paper) {
+    private void buildPaper(Element element, Paper.Builder paper) {
         String id = element.getAttribute(AttributesName.ID.name().toLowerCase());
-        paper.setId(id);
+        paper.withId(id);
         String publicationDate = element.getAttribute(AttributesName.PUBLICATION_DATE.name().toLowerCase());
         if (!publicationDate.isEmpty()) {
-            paper.setPublicationDate(publicationDate);
+            paper.withPublicationDate(publicationDate);
         }
         String title = getElementTextContext(element, TagName.TITLE.name().toLowerCase());
-        paper.setTitle(title);
+        paper.withTitle(title);
         logger.info("title -> " + title);
         boolean monthly = Boolean.parseBoolean(getElementTextContext(element, TagName.MONTHLY.name().toLowerCase()));
-        paper.setMonthly(monthly);
+        paper.withMonthly(monthly);
         logger.info("monthly -> " + monthly);
         boolean color = Boolean.parseBoolean(getElementTextContext(element, TagName.COLOR.name().toLowerCase()));
-        paper.setColor(color);
+        paper.withColor(color);
         logger.info("color -> " + color);
         int volume = Integer.parseInt(getElementTextContext(element, TagName.VOLUME.name().toLowerCase()));
-        paper.setVolume(volume);
+        paper.withVolume(volume);
         logger.info("volume -> " + volume);
         String type = getElementTextContext(element, TagName.TYPE.name().toLowerCase());
-        paper.setType(type);
+        paper.withType(type);
         logger.info("type -> " + type);
         boolean glossy = Boolean.parseBoolean(getElementTextContext(element, TagName.GLOSSY.name().toLowerCase()));
-        paper.setGlossy(glossy);
+        paper.withGlossy(glossy);
         logger.info("glossy -> " + glossy);
     }
 

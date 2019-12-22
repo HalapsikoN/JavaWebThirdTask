@@ -19,7 +19,7 @@ public class StAXHandler {
     private static final Logger logger = LogManager.getLogger(StAXHandler.class);
 
     private List<Paper> paperList = new ArrayList<>();
-    private Paper current;
+    private Paper.Builder current;
     private TagName tag;
 
     public List<Paper> getPaperList() {
@@ -39,19 +39,19 @@ public class StAXHandler {
                     switch (tag) {
                         case MAGAZINE: {
                             logger.info("<-----magazine element start----->");
-                            current = new Magazine();
+                            current = new Magazine.Builder();
                             setIdAndDateAttribute(reader);
                             break;
                         }
                         case NEWSPAPER: {
                             logger.info("<-----newspaper element start----->");
-                            current = new Newspaper();
+                            current = new Newspaper.Builder();
                             setIdAndDateAttribute(reader);
                             break;
                         }
                         case BOOKLET: {
                             logger.info("<-----booklet element start----->");
-                            current = new Booklet();
+                            current = new Booklet.Builder();
                             setIdAndDateAttribute(reader);
                             break;
                         }
@@ -66,44 +66,44 @@ public class StAXHandler {
                     switch (tag) {
                         case TITLE: {
                             logger.info("title -> " + text);
-                            current.setTitle(text);
+                            current.withTitle(text);
                             break;
                         }
                         case MONTHLY: {
                             logger.info("monthly -> " + text);
-                            current.setMonthly(Boolean.valueOf(text));
+                            current.withMonthly(Boolean.valueOf(text));
                             break;
                         }
                         case COLOR: {
                             logger.info("color -> " + text);
-                            current.setColor(Boolean.valueOf(text));
+                            current.withColor(Boolean.valueOf(text));
                             break;
                         }
                         case VOLUME: {
                             logger.info("volume -> " + text);
-                            current.setVolume(Integer.valueOf(text));
+                            current.withVolume(Integer.valueOf(text));
                             break;
                         }
                         case TYPE: {
                             logger.info("type -> " + text);
-                            current.setType(text);
+                            current.withType(text);
                             break;
                         }
                         case GLOSSY: {
                             logger.info("glossy -> " + text);
-                            current.setGlossy(Boolean.valueOf(text));
+                            current.withGlossy(Boolean.valueOf(text));
                             break;
                         }
                         case INDEX: {
-                            if (current.getClass().equals(Magazine.class)) {
+                            if (current.getClass().equals(Magazine.Builder.class)) {
                                 logger.info("index -> " + text);
-                                Magazine magazine = (Magazine) current;
-                                magazine.setIndex(Integer.valueOf(text));
+                                Magazine.Builder magazine = (Magazine.Builder) current;
+                                magazine.withIndex(Integer.valueOf(text));
                             }
-                            if (current.getClass().equals(Newspaper.class)) {
+                            if (current.getClass().equals(Newspaper.Builder.class)) {
                                 logger.info("index -> " + text);
-                                Newspaper magazine = (Newspaper) current;
-                                magazine.setIndex(Integer.valueOf(text));
+                                Newspaper.Builder magazine = (Newspaper.Builder) current;
+                                magazine.withIndex(Integer.valueOf(text));
                             }
                             break;
                         }
@@ -116,7 +116,7 @@ public class StAXHandler {
                         case MAGAZINE:
                         case NEWSPAPER:
                         case BOOKLET: {
-                            paperList.add(current);
+                            paperList.add(current.build());
                             current = null;
                             break;
                         }
@@ -132,10 +132,10 @@ public class StAXHandler {
 
     private void setIdAndDateAttribute(XMLStreamReader reader) {
         String id = reader.getAttributeValue(null, AttributesName.ID.name().toLowerCase());
-        current.setId(id);
+        current.withId(id);
         String publicationDate = reader.getAttributeValue(null, AttributesName.PUBLICATION_DATE.name().toLowerCase());
         if (publicationDate != null) {
-            current.setPublicationDate(publicationDate);
+            current.withPublicationDate(publicationDate);
         }
     }
 }

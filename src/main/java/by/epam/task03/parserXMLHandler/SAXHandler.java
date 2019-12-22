@@ -20,7 +20,7 @@ public class SAXHandler extends DefaultHandler {
     private static final Logger logger = LogManager.getLogger(SAXHandler.class);
 
     private List<Paper> paperList = new ArrayList<>();
-    private Paper current;
+    private Paper.Builder current;
     private StringBuilder text;
 
     public List<Paper> getPaperList() {
@@ -38,17 +38,17 @@ public class SAXHandler extends DefaultHandler {
         text = new StringBuilder();
         if (localName.equals(PaperType.MAGAZINE.name().toLowerCase())) {
             logger.info("<-----magazine element start----->");
-            current = new Magazine();
+            current = new Magazine.Builder();
             setIdAndDateAttributes(attributes);
         }
         if (localName.equals(PaperType.NEWSPAPER.name().toLowerCase())) {
             logger.info("<-----newspaper element----->");
-            current = new Newspaper();
+            current = new Newspaper.Builder();
             setIdAndDateAttributes(attributes);
         }
         if (localName.equals(PaperType.BOOKLET.name().toLowerCase())) {
             logger.info("<-----booklet element----->");
-            current = new Booklet();
+            current = new Booklet.Builder();
             setIdAndDateAttributes(attributes);
         }
     }
@@ -64,44 +64,44 @@ public class SAXHandler extends DefaultHandler {
         switch (tagName) {
             case TITLE: {
                 logger.info("title -> " + text.toString());
-                current.setTitle(text.toString());
+                current.withTitle(text.toString());
                 break;
             }
             case MONTHLY: {
                 logger.info("monthly -> " + text.toString());
-                current.setMonthly(Boolean.valueOf(text.toString()));
+                current.withMonthly(Boolean.valueOf(text.toString()));
                 break;
             }
             case COLOR: {
                 logger.info("color -> " + text.toString());
-                current.setColor(Boolean.valueOf(text.toString()));
+                current.withColor(Boolean.valueOf(text.toString()));
                 break;
             }
             case VOLUME: {
                 logger.info("volume -> " + text.toString());
-                current.setVolume(Integer.valueOf(text.toString()));
+                current.withVolume(Integer.valueOf(text.toString()));
                 break;
             }
             case TYPE: {
                 logger.info("type -> " + text.toString());
-                current.setType(text.toString());
+                current.withType(text.toString());
                 break;
             }
             case GLOSSY: {
                 logger.info("glossy -> " + text.toString());
-                current.setGlossy(Boolean.valueOf(text.toString()));
+                current.withGlossy(Boolean.valueOf(text.toString()));
                 break;
             }
             case INDEX: {
-                if (current.getClass().equals(Magazine.class)) {
+                if (current.getClass().equals(Magazine.Builder.class)) {
                     logger.info("index -> " + text.toString());
-                    Magazine magazine = (Magazine) current;
-                    magazine.setIndex(Integer.valueOf(text.toString()));
+                    Magazine.Builder magazine = (Magazine.Builder) current;
+                    magazine.withIndex(Integer.valueOf(text.toString()));
                 }
-                if (current.getClass().equals(Newspaper.class)) {
+                if (current.getClass().equals(Newspaper.Builder.class)) {
                     logger.info("index -> " + text.toString());
-                    Newspaper magazine = (Newspaper) current;
-                    magazine.setIndex(Integer.valueOf(text.toString()));
+                    Newspaper.Builder magazine = (Newspaper.Builder) current;
+                    magazine.withIndex(Integer.valueOf(text.toString()));
                 }
                 break;
             }
@@ -109,7 +109,7 @@ public class SAXHandler extends DefaultHandler {
             case NEWSPAPER:
             case BOOKLET: {
                 logger.info("<-----element end----->");
-                paperList.add(current);
+                paperList.add(current.build());
                 current = null;
                 break;
             }
@@ -124,10 +124,10 @@ public class SAXHandler extends DefaultHandler {
 
     private void setIdAndDateAttributes(Attributes attributes) {
         String id = attributes.getValue(AttributesName.ID.name().toLowerCase());
-        current.setId(id);
+        current.withId(id);
         if (attributes.getLength() > 1) {
             String publicationDate = attributes.getValue(AttributesName.PUBLICATION_DATE.name().toLowerCase());
-            current.setPublicationDate(publicationDate);
+            current.withPublicationDate(publicationDate);
         }
     }
 }

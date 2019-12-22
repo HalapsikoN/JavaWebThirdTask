@@ -8,8 +8,31 @@ public class Newspaper extends Paper {
         this.index = index;
     }
 
-    public Newspaper() {
-        super();
+
+    private Newspaper(Builder builder){
+        this.setTitle(builder.getTitle());
+        this.setPublicationDate(builder.getPublicationDate());
+        this.setType(builder.getType());
+        this.setId(builder.getId());
+        this.setGlossy(builder.isGlossy());
+        this.setVolume(builder.getVolume());
+        this.setColor(builder.isColor());
+        this.setMonthly(builder.isMonthly());
+        this.setIndex(builder.index);
+    }
+
+    public static class Builder extends Paper.Builder{
+        private int index;
+
+        public Builder withIndex(int value){
+            index=value;
+            return this;
+        }
+
+        @Override
+        public Newspaper build() {
+            return new Newspaper(this);
+        }
     }
 
     public int getIndex() {

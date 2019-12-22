@@ -23,6 +23,91 @@ public abstract class Paper {
         this.volume = volume;
     }
 
+    public static abstract class Builder{
+        private String id;
+        private String publicationDate;
+        private String title;
+        private String type;
+        private boolean monthly;
+        private boolean color;
+        private boolean glossy;
+        private int volume;
+
+        public Builder withId(String value){
+            id=value;
+            return this;
+        }
+
+        public Builder withPublicationDate(String value){
+            publicationDate=value;
+            return this;
+        }
+
+        public Builder withTitle(String value){
+            title=value;
+            return this;
+        }
+
+        public Builder withType(String value){
+            type=value;
+            return this;
+        }
+
+        public Builder withMonthly(boolean value){
+            monthly=value;
+            return this;
+        }
+
+        public Builder withColor(boolean value){
+            color=value;
+            return this;
+        }
+
+        public Builder withGlossy(boolean value){
+            glossy=value;
+            return this;
+        }
+
+        public Builder withVolume(int value){
+            volume=value;
+            return this;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getPublicationDate() {
+            return publicationDate;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public boolean isMonthly() {
+            return monthly;
+        }
+
+        public boolean isColor() {
+            return color;
+        }
+
+        public boolean isGlossy() {
+            return glossy;
+        }
+
+        public int getVolume() {
+            return volume;
+        }
+
+        public abstract Paper build();
+    }
+
     public Paper() {
     }
 

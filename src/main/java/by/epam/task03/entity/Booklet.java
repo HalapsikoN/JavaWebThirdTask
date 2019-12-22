@@ -5,7 +5,22 @@ public class Booklet extends Paper {
         super(id, publicationDate, title, type, monthly, color, glossy, volume);
     }
 
-    public Booklet() {
+    private Booklet(Builder builder){
+        this.setTitle(builder.getTitle());
+        this.setPublicationDate(builder.getPublicationDate());
+        this.setType(builder.getType());
+        this.setId(builder.getId());
+        this.setGlossy(builder.isGlossy());
+        this.setVolume(builder.getVolume());
+        this.setColor(builder.isColor());
+        this.setMonthly(builder.isMonthly());
+    }
+
+    public static class Builder extends Paper.Builder{
+        @Override
+        public Booklet build() {
+            return new Booklet(this);
+        }
     }
 
     @Override
