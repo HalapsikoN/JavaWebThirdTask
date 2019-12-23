@@ -8,7 +8,7 @@ public class Magazine extends Paper {
         this.index = index;
     }
 
-    private Magazine(Builder builder){
+    private Magazine(Builder builder) {
         this.setTitle(builder.getTitle());
         this.setPublicationDate(builder.getPublicationDate());
         this.setType(builder.getType());
@@ -17,14 +17,19 @@ public class Magazine extends Paper {
         this.setVolume(builder.getVolume());
         this.setColor(builder.isColor());
         this.setMonthly(builder.isMonthly());
-        this.setIndex(builder.index);
+        this.index = builder.index;
     }
 
-    public static class Builder extends Paper.Builder{
+    public static class Builder extends Paper.Builder<Builder> {
         private int index;
 
-        public Builder withIndex(int value){
-            index=value;
+        public Builder withIndex(int value) {
+            index = value;
+            return this;
+        }
+
+        @Override
+        protected Builder self() {
             return this;
         }
 
@@ -36,10 +41,6 @@ public class Magazine extends Paper {
 
     public int getIndex() {
         return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
     }
 
     @Override

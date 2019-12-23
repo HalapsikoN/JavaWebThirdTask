@@ -23,7 +23,7 @@ public abstract class Paper {
         this.volume = volume;
     }
 
-    public static abstract class Builder{
+    public static abstract class Builder<T extends Builder<T>> {
         private String id;
         private String publicationDate;
         private String title;
@@ -33,44 +33,44 @@ public abstract class Paper {
         private boolean glossy;
         private int volume;
 
-        public Builder withId(String value){
-            id=value;
-            return this;
+        public T withId(String value) {
+            id = value;
+            return self();
         }
 
-        public Builder withPublicationDate(String value){
-            publicationDate=value;
-            return this;
+        public T withPublicationDate(String value) {
+            publicationDate = value;
+            return self();
         }
 
-        public Builder withTitle(String value){
-            title=value;
-            return this;
+        public T withTitle(String value) {
+            title = value;
+            return self();
         }
 
-        public Builder withType(String value){
-            type=value;
-            return this;
+        public T withType(String value) {
+            type = value;
+            return self();
         }
 
-        public Builder withMonthly(boolean value){
-            monthly=value;
-            return this;
+        public T withMonthly(boolean value) {
+            monthly = value;
+            return self();
         }
 
-        public Builder withColor(boolean value){
-            color=value;
-            return this;
+        public T withColor(boolean value) {
+            color = value;
+            return self();
         }
 
-        public Builder withGlossy(boolean value){
-            glossy=value;
-            return this;
+        public T withGlossy(boolean value) {
+            glossy = value;
+            return self();
         }
 
-        public Builder withVolume(int value){
-            volume=value;
-            return this;
+        public T withVolume(int value) {
+            volume = value;
+            return self();
         }
 
         public String getId() {
@@ -105,6 +105,8 @@ public abstract class Paper {
             return volume;
         }
 
+        protected abstract T self();
+
         public abstract Paper build();
     }
 
@@ -115,7 +117,7 @@ public abstract class Paper {
         return id;
     }
 
-    public void setId(String id) {
+    protected void setId(String id) {
         this.id = id;
     }
 
@@ -123,7 +125,7 @@ public abstract class Paper {
         return publicationDate;
     }
 
-    public void setPublicationDate(String publicationDate) {
+    protected void setPublicationDate(String publicationDate) {
         this.publicationDate = publicationDate;
     }
 
@@ -131,7 +133,7 @@ public abstract class Paper {
         return title;
     }
 
-    public void setTitle(String title) {
+    protected void setTitle(String title) {
         this.title = title;
     }
 
@@ -139,7 +141,7 @@ public abstract class Paper {
         return monthly;
     }
 
-    public void setMonthly(boolean monthly) {
+    protected void setMonthly(boolean monthly) {
         this.monthly = monthly;
     }
 
@@ -147,7 +149,7 @@ public abstract class Paper {
         return color;
     }
 
-    public void setColor(boolean color) {
+    protected void setColor(boolean color) {
         this.color = color;
     }
 
@@ -155,7 +157,7 @@ public abstract class Paper {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    protected void setVolume(int volume) {
         this.volume = volume;
     }
 
@@ -163,7 +165,7 @@ public abstract class Paper {
         return type;
     }
 
-    public void setType(String type) {
+    protected void setType(String type) {
         this.type = type;
     }
 
@@ -171,7 +173,7 @@ public abstract class Paper {
         return glossy;
     }
 
-    public void setGlossy(boolean glossy) {
+    protected void setGlossy(boolean glossy) {
         this.glossy = glossy;
     }
 

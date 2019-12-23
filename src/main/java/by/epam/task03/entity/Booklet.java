@@ -5,7 +5,7 @@ public class Booklet extends Paper {
         super(id, publicationDate, title, type, monthly, color, glossy, volume);
     }
 
-    private Booklet(Builder builder){
+    private Booklet(Builder builder) {
         this.setTitle(builder.getTitle());
         this.setPublicationDate(builder.getPublicationDate());
         this.setType(builder.getType());
@@ -16,7 +16,12 @@ public class Booklet extends Paper {
         this.setMonthly(builder.isMonthly());
     }
 
-    public static class Builder extends Paper.Builder{
+    public static class Builder extends Paper.Builder<Builder> {
+        @Override
+        protected Builder self() {
+            return this;
+        }
+
         @Override
         public Booklet build() {
             return new Booklet(this);
