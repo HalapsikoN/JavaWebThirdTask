@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <papers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="../src/main/resources/papers.xsd">
-    <newspaper>
-        <title>FOX</title>
+        xmlns="papersNamespace"
+        xsi:schemaLocation="papersNamespace ../src/main/resources/papers.xsd">
+
+    <newspaper id="ID-1" publication_date="1124-12-26">
+        <title>Test newspaper1</title>
         <monthly>true</monthly>
-        <color>true</color>
-        <volume>56</volume>
-        <index>15</index>
+        <color>false</color>
+        <volume>15</volume>
+        <type>newspaper</type>
+        <glossy>false</glossy>
+        <index>44654</index>
     </newspaper>
 
+    <booklet id="ID-2" publication_date="0666-11-11">
+        <title>Test booklet1</title>
+        <monthly>true</monthly>
+        <color>true</color>
+        <volume>2</volume>
+        <type>booklet</type>
+        <glossy>true</glossy>
+    </booklet>
+
+    <magazine id="ID-3" publication_date="2365-03-15">
+        <title>Test magazine1</title>
+        <monthly>false</monthly>
+        <color>true</color>
+        <volume>33</volume>
+        <type>magazine</type>
+        <glossy>true</glossy>
+        <index>469854</index>
+    </magazine>
+
+    <booklet id="ID-4">
+        <title>Test booklet2</title>
+        <monthly>false</monthly>
+        <color>true</color>
+        <volume>56</volume>
+        <type>booklet</type>
+        <glossy>true</glossy>
+    </booklet>
 
 
 </papers>
